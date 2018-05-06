@@ -21,7 +21,7 @@ All the C++ code is here in main directory. The more interesting files are:
 
 ### Prerequisites
 
-Nothing extra needs to install. Read this for further deatils regarding installation [Installation] (https://github.com/udacity/FCND-Controls-CPP)
+Nothing extra needs to install. Read this for further deatils regarding installation [Installation](https://github.com/udacity/FCND-Controls-CPP)
 
 ### Run the code
 
@@ -73,21 +73,19 @@ PASS: ABS(Quad.Omega.X) was less than 2.500000 for at least 0.750000 seconds
 
 There are three methods to implement here:
 
-- [AltitudeControl](./cpp/src/QuadControl.cpp#L169-L212): This is a [PD controller](https://en.wikipedia.org/wiki/PID_controller) to control the acceleration meaning the thrust needed to control the altitude.
+- [AltitudeControl](./src/QuadControl.cpp#L169-L212): This is a [PD controller](https://en.wikipedia.org/wiki/PID_controller) to control the acceleration meaning the thrust needed to control the altitude.
 
 ![Altitude controller equations](./images/altitude_eq.gif)
 
 To test this, go back to scenario 2 and make sure the drone doesn't fall. In that scenario, the PID is configured not to act, and the thrust should be `mass * CONST_GRAVITY`.
 
-- [LateralPositionControl](./cpp/src/QuadControl.cpp#L215-L267) This is another PID controller to control acceleration on `x` and `y`.
+- [LateralPositionControl](./src/QuadControl.cpp#L215-L267) This is another PID controller to control acceleration on `x` and `y`.
 
-- [YawControl](./cpp/src/QuadControl.cpp#L270-L302): This is a simpler case because it is P controller. It is better to optimize the yaw to be between `[-pi, pi]`.
+- [YawControl](./src/QuadControl.cpp#L270-L302): This is a simpler case because it is P controller. It is better to optimize the yaw to be between `[-pi, pi]`.
 
 Once all the code is implemented, put all the `kpYaw`,`kpPosXY`, `kpVelXY`, `kpPosZ` and `kpVelZ` to zero. Take a deep breath, and start tuning from the altitude controller to the yaw controller. It takes time. Here is a video of the scenario when it passes:
 
 ![C++ Scenario 3](./images/cpp-scenario-3.gif)
-
-This video is [cpp-scenario-3.mov](./videos/cpp-scenario-3.mov)
 
 When the scenario is passing the test, you should see this line on the standard output:
 
@@ -99,7 +97,7 @@ PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
 
 #### Scenario 4: Non-idealities and robustness
 
-This is a fun scenario. Everything is coded and tuned already, right? Ok, we need to add an integral part to the altitude controller to move it from PD to PID controller. What happens to me here is that everything starts not working correctly, and I have to tune everything again, starting from scenario -1. Remember patience is a "virtue", and to it again. If you cannot and get frustrated talk to your peers, they will be able to give you hints. It is hard but doable:
+Everything is coded and tuned already, right? Ok, we need to add an integral part to the altitude controller to move it from PD to PID controller. What happens to me here is that everything starts not working correctly, and I have to tune everything again, starting from scenario -1. Remember patience is a "virtue", and to it again. If you cannot and get frustrated talk to your peers, they will be able to give you hints. It is hard but doable:
 
 ![C++ Scenario 4](./images/cpp-scenario-4.gif)
 
@@ -145,27 +143,27 @@ This markdown is the write-up.
 
 ### Implemented body rate control.
 
-The body rate control is implemented as proportional control in [/src/QuadControl::BodyRateControl method ](/src/QuadControl.cpp#L95-L121) from line 94 to 121 using C++.
+The body rate control is implemented as proportional control in [/src/QuadControl::BodyRateControl method ](/src/QuadControl.cpp#L94-L121) from line 94 to 121 using C++.
 
 ### Implement roll pitch control.
 
-The roll pitch control is implemented in [/src/QuadControl::RollPitchControl method ](/src/QuadControl.cpp#L124-L167) from line 124 to 171 using C++.
+The roll pitch control is implemented in [/src/QuadControl::RollPitchControl method ](/src/QuadControl.cpp#L124-L171) from line 124 to 171 using C++.
 
 ### Implement altitude controller.
 
-The altitude control is implemented in [/src/QuadControl::AltitudeControl method ](/src/QuadControl.cpp#L169-L212) from line 173 to 219 using C++.
+The altitude control is implemented in [/src/QuadControl::AltitudeControl method ](/src/QuadControl.cpp#L173-L219) from line 173 to 219 using C++.
 
 ### Implement lateral position.
 
-The lateral position control is implemented in [/src/QuadControl::LateralPositionControl method ](/src/QuadControl.cpp#L215-L267) from line 222 to 279 using C++.
+The lateral position control is implemented in [/src/QuadControl::LateralPositionControl method ](/src/QuadControl.cpp#L222-L279) from line 222 to 279 using C++.
 
 ### Implement yaw control.
 
-The yaw control is implemented in [/src/QuadControl::YawControl method ](/src/QuadControl.cpp#L270-L302) from line 282 to 316 using C++.
+The yaw control is implemented in [/src/QuadControl::YawControl method ](/src/QuadControl.cpp#L282-L316) from line 282 to 316 using C++.
 
 ### Implement calculating the motor commands given commanded thrust and moments in C++.
 
-The calculation implementation for the motor commands is in [/src/QuadControl::GenerateMotorCommands method ](/src/QuadControl.cpp#L58-L93) from line 56 to 92.
+The calculation implementation for the motor commands is in [/src/QuadControl::GenerateMotorCommands method ](/src/QuadControl.cpp#L56-L92) from line 56 to 92.
 
 
 ### Your C++ controller is successfully able to fly the provided test trajectory and visually passes the inspection of the scenarios leading up to the test trajectory.
