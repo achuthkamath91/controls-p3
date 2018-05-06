@@ -31,7 +31,7 @@ Following the instruction on the seed project, load the project on the IDE. Reme
 
 In this scenario, we adjust the mass of the drone in [/config/QuadControlParams.txt](./config/QuadControlParams.txt) until it hovers for a bit:
 
-![C++ Scenario 1](./images/cpp-scenario-1.gif)
+![C++ Scenario 1](./images/scenario-1.gif)
 
 When the scenario is passing the test, you should see this line on the standard output:
 
@@ -59,7 +59,7 @@ But the problem is you need to output roll and pitch rates; so, there is another
 
 It is important to notice you received thrust and thrust it need to be inverted and converted to acceleration before applying the equations. After the implementation is done, start tuning `kpBank` and `kpPQR`(again? yes, and it is not the last time) until the drone flies more or less stable upward:
 
-![C++ Scenario 2](./images/cpp-scenario-2.gif)
+![C++ Scenario 2](./images/scenario-2.gif)
 
 
 When the scenario is passing the test, you should see this line on the standard output:
@@ -85,7 +85,7 @@ To test this, go back to scenario 2 and make sure the drone doesn't fall. In tha
 
 Once all the code is implemented, put all the `kpYaw`,`kpPosXY`, `kpVelXY`, `kpPosZ` and `kpVelZ` to zero. Take a deep breath, and start tuning from the altitude controller to the yaw controller. It takes time. Here is a video of the scenario when it passes:
 
-![C++ Scenario 3](./images/cpp-scenario-3.gif)
+![C++ Scenario 3](./images/scenario-3.gif)
 
 When the scenario is passing the test, you should see this line on the standard output:
 
@@ -99,7 +99,7 @@ PASS: ABS(Quad2.Yaw) was less than 0.100000 for at least 1.000000 seconds
 
 Everything is coded and tuned already, right? Ok, we need to add an integral part to the altitude controller to move it from PD to PID controller. What happens to me here is that everything starts not working correctly, and I have to tune everything again, starting from scenario -1. Remember patience is a "virtue", and to it again. If you cannot and get frustrated talk to your peers, they will be able to give you hints. It is hard but doable:
 
-![C++ Scenario 4](./images/cpp-scenario-4.gif)
+![C++ Scenario 4](./images/scenario-4.gif)
 
 When the scenario is passing the test, you should see this line on the standard output:
 
@@ -113,7 +113,7 @@ PASS: ABS(Quad3.PosFollowErr) was less than 0.100000 for at least 1.500000 secon
 
 This is the final non-optional scenario. The drone needs to follow a trajectory. It will show all the errors in your code and also force you to tune some parameters again. Remember there are comments on the controller methods regarding limits that need to be imposed on the system. Here those limits are required in order to pass.
 
-![C++ Scenario 5](./images/cpp-scenario-5.gif)
+![C++ Scenario 5](./images/scenario-5.gif)
 
 When the scenario is passing the test, you should see this line on the standard output:
 
@@ -123,13 +123,13 @@ PASS: ABS(Quad2.PosFollowErr) was less than 0.250000 for at least 3.000000 secon
 
 There are a few optional scenarios on this project, but I was exhausted. Too many long hours were tuning parameters and finding bugs. There should be a lot of room for improvement. Here is the video of a multi-drone scenario:
 
-![C++ Multidrone](./images/cpp-scenario-multi-drone.gif)
+![C++ Multidrone](./images/scenario-multi-drone.gif)
 
 No idea why some of them go nuts!!!!! (and then come back to the "formation".)
 
 **Post submit note** The tilt angle limit enforcing was missing on the `RollPitchControl`. Here is a video with no-crazy drones:
 
-![C++ Multidrone ok](./images/cpp-scenario-multi-drone-1.gif)
+![C++ Multidrone ok](./images/scenario-multi-drone-1.gif)
 
 
 # [Project Rubric](https://review.udacity.com/#!/rubrics/1643/view)
