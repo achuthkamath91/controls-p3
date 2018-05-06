@@ -41,15 +41,15 @@ PASS: ABS(Quad.PosFollowErr) was less than 0.500000 for at least 0.800000 second
 
 #### Scenario 2: Body rate and roll/pitch control
 
-Now is time to start coding. The [GenerateMotorCommands method](./cpp/src/QuadControl.cpp#L58-L93) needs to be coded resolving this equations:
+Now is time to start coding. The [GenerateMotorCommands method](./src/QuadControl.cpp#L58-L93) needs to be coded resolving this equations:
 
 ![Moment force equations](./images/moments_force_eq.gif)
 
 Where all the `F_1` to `F_4` are the motor's thrust, `tao(x,y,z)` are the moments on each direction, `F_t` is the total thrust, kappa is the drag/thrust ratio and `l` is the drone arm length over square root of two. These equations come from the classroom lectures. There are a couple of things to consider. For example, on NED coordinates the `z` axis is inverted that is why the moment on `z` was inverted here. Another observation while implementing this is that `F_3` and `F_4` are switched, e.g. `F_3` in the lectures is `F_4` on the simulator and the same for `F_4`.
 
-The second step is to implement the [BodyRateControl method](./cpp/src/QuadControl.cpp#L95-L121) applying a [P controller](https://en.wikipedia.org/wiki/Proportional_control) and the moments of inertia. At this point, the `kpPQR` parameter has to be tuned to stop the drone from flipping, but first, some thrust needs to be commanded in the altitude control because we don't have thrust commanded on the `GenerateMotorCommands` anymore. A good value is `thurst = mass * CONST_GRAVITY`.
+The second step is to implement the [BodyRateControl method](./src/QuadControl.cpp#L94-L121) applying a [P controller](https://en.wikipedia.org/wiki/Proportional_control) and the moments of inertia. At this point, the `kpPQR` parameter has to be tuned to stop the drone from flipping, but first, some thrust needs to be commanded in the altitude control because we don't have thrust commanded on the `GenerateMotorCommands` anymore. A good value is `thurst = mass * CONST_GRAVITY`.
 
-Once this is done, we move on to the [RollPitchControl method](./cpp/src/QuadControl.cpp#L124-L167). For this implementation, you need to apply a few equations. You need to apply a P controller to the elements `R13` and `R23` of the [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix) from body-frame accelerations and world frame accelerations:
+Once this is done, we move on to the [RollPitchControl method](./src/QuadControl.cpp#L124-L171). For this implementation, you need to apply a few equations. You need to apply a P controller to the elements `R13` and `R23` of the [rotation matrix](https://en.wikipedia.org/wiki/Rotation_matrix) from body-frame accelerations and world frame accelerations:
 
 ![Roll and pitch P controller](./images/roll_pitch_p_controller.gif)
 
@@ -73,15 +73,15 @@ PASS: ABS(Quad.Omega.X) was less than 2.500000 for at least 0.750000 seconds
 
 There are three methods to implement here:
 
-- [AltitudeControl](./src/QuadControl.cpp#L169-L212): This is a [PD controller](https://en.wikipedia.org/wiki/PID_controller) to control the acceleration meaning the thrust needed to control the altitude.
+- [AltitudeControl](./src/QuadControl.cpp#L173-L219): This is a [PD controller](https://en.wikipedia.org/wiki/PID_controller) to control the acceleration meaning the thrust needed to control the altitude.
 
 ![Altitude controller equations](./images/altitude_eq.gif)
 
 To test this, go back to scenario 2 and make sure the drone doesn't fall. In that scenario, the PID is configured not to act, and the thrust should be `mass * CONST_GRAVITY`.
 
-- [LateralPositionControl](./src/QuadControl.cpp#L215-L267) This is another PID controller to control acceleration on `x` and `y`.
+- [LateralPositionControl](./src/QuadControl.cpp#L222-L279) This is another PID controller to control acceleration on `x` and `y`.
 
-- [YawControl](./src/QuadControl.cpp#L270-L302): This is a simpler case because it is P controller. It is better to optimize the yaw to be between `[-pi, pi]`.
+- [YawControl](./src/QuadControl.cpp#L282-L316): This is a simpler case because it is P controller. It is better to optimize the yaw to be between `[-pi, pi]`.
 
 Once all the code is implemented, put all the `kpYaw`,`kpPosXY`, `kpVelXY`, `kpPosZ` and `kpVelZ` to zero. Take a deep breath, and start tuning from the altitude controller to the yaw controller. It takes time. Here is a video of the scenario when it passes:
 
