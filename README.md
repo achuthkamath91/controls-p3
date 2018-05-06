@@ -1,5 +1,5 @@
 # FCND controls-p3
-Udacity Project 3 onQuadcopter controls-p3
+Udacity Project 3 on Quadcopter controls
 
 In this project, you get to implement and tune a [cascade PID controller](https://controlstation.com/cascade-control-cascade-control-configured/) for drone trajectory tracking. The theory behind the controller design using feed-forward strategy is explained in details on our instructor, [Angela P. Schoellig](http://www.dynsyslab.org/prof-angela-schoellig/), on her paper [Feed-Forward Parameter Identification for Precise Periodic
 Quadrocopter Motions](http://www.dynsyslab.org/wp-content/papercite-data/pdf/schoellig-acc12.pdf). The following diagram could be found on that paper describing the cascaded control loops of the trajectory-following controller:
@@ -21,11 +21,11 @@ All the C++ code is here in main directory. The more interesting files are:
 
 ### Prerequisites
 
-Nothing extra needs to install but the IDE is necessary to compile the code. In my case XCode because I am using a Macbook. Please, follow the instructions on the [seed project README.md](https://github.com/udacity/FCND-Controls-CPP).
+Nothing extra needs to install. Read this for further deatils regarding installation [Installation] (https://github.com/udacity/FCND-Controls-CPP)
 
 ### Run the code
 
-Following the instruction on the seed project, load the project on the IDE. Remember the code is on [/](./).
+Following the instruction on the seed project, load the project on the IDE. Remember the code is on [here](./src).
 
 #### Scenario 1: Intro
 
@@ -103,8 +103,6 @@ This is a fun scenario. Everything is coded and tuned already, right? Ok, we nee
 
 ![C++ Scenario 4](./images/cpp-scenario-4.gif)
 
-This video is [cpp-scenario-4.mov](./videos/cpp-scenario-4.mov)
-
 When the scenario is passing the test, you should see this line on the standard output:
 
 ```
@@ -118,8 +116,6 @@ PASS: ABS(Quad3.PosFollowErr) was less than 0.100000 for at least 1.500000 secon
 This is the final non-optional scenario. The drone needs to follow a trajectory. It will show all the errors in your code and also force you to tune some parameters again. Remember there are comments on the controller methods regarding limits that need to be imposed on the system. Here those limits are required in order to pass.
 
 ![C++ Scenario 5](./images/cpp-scenario-5.gif)
-
-This video is [cpp-scenario-5.mov](./videos/cpp-scenario-5.mov)
 
 When the scenario is passing the test, you should see this line on the standard output:
 
@@ -149,27 +145,27 @@ This markdown is the write-up.
 
 ### Implemented body rate control.
 
-The body rate control is implemented as proportional control in [/src/QuadControl::BodyRateControl method ](/src/QuadControl.cpp#L95-L121) from line 95 to 121 using C++.
+The body rate control is implemented as proportional control in [/src/QuadControl::BodyRateControl method ](/src/QuadControl.cpp#L95-L121) from line 94 to 121 using C++.
 
 ### Implement roll pitch control.
 
-The roll pitch control is implemented in [/src/QuadControl::RollPitchControl method ](/src/QuadControl.cpp#L124-L167) from line 124 to 167 using C++.
+The roll pitch control is implemented in [/src/QuadControl::RollPitchControl method ](/src/QuadControl.cpp#L124-L167) from line 124 to 171 using C++.
 
 ### Implement altitude controller.
 
-The altitude control is implemented in [/src/QuadControl::AltitudeControl method ](/src/QuadControl.cpp#L169-L212) from line 169 to 212 using C++.
+The altitude control is implemented in [/src/QuadControl::AltitudeControl method ](/src/QuadControl.cpp#L169-L212) from line 173 to 219 using C++.
 
 ### Implement lateral position.
 
-The lateral position control is implemented in [/src/QuadControl::LateralPositionControl method ](/src/QuadControl.cpp#L215-L267) from line 215 to 267 using C++.
+The lateral position control is implemented in [/src/QuadControl::LateralPositionControl method ](/src/QuadControl.cpp#L215-L267) from line 222 to 279 using C++.
 
 ### Implement yaw control.
 
-The yaw control is implemented in [/src/QuadControl::YawControl method ](/src/QuadControl.cpp#L270-L302) from line 270 to 302 using C++.
+The yaw control is implemented in [/src/QuadControl::YawControl method ](/src/QuadControl.cpp#L270-L302) from line 282 to 316 using C++.
 
 ### Implement calculating the motor commands given commanded thrust and moments in C++.
 
-The calculation implementation for the motor commands is in [/src/QuadControl::GenerateMotorCommands method ](/src/QuadControl.cpp#L58-L93) from line 58 to 93.
+The calculation implementation for the motor commands is in [/src/QuadControl::GenerateMotorCommands method ](/src/QuadControl.cpp#L58-L93) from line 56 to 92.
 
 
 ### Your C++ controller is successfully able to fly the provided test trajectory and visually passes the inspection of the scenarios leading up to the test trajectory.
